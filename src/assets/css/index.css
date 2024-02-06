@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  color: #131523;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background-clip: content-box;
+  background-color: #fff;
+  width: 20px;
+  border-radius: 24px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  background-color: var(--text-selected);
+  border-radius: 24px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-color: #849aac #849aac27;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f5f6fa;
+  scroll-behavior: smooth;
+  font-size: var(--font-size-base);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+h1 {
+  font-size: var(--font-size-xxxl);
+}
+
+h2 {
+  font-size: var(--font-size-xxl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+}
+
+h5 {
+  font-size: var(--font-size-md);
+}
+h6 {
+  font-size: var(--font-size-base);
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.row_none {
+  display: none;
+  background-color: white;
+}
+.row_none_show {
+  display: block;
+  background-color: white;
+}
+.row_small {
+  display: flex;
+  height: 80px;
+  margin-top: 20px;
+}
+
+/* Fluid font size variables, for browsers that support clamp */
+@supports (font-size: clamp(1rem, 1vw, 1rem)) {
+  :root {
+    --font-size-sm: clamp(0.7rem, 0.1vw + 0.68rem, 0.8rem);
+    --font-size-base: clamp(0.88rem, 0.19vw + 0.84rem, 1.06rem);
+    --font-size-md: clamp(1.09rem, 0.32vw + 1.03rem, 1.42rem);
+    --font-size-lg: clamp(1.37rem, 0.52vw + 1.26rem, 1.89rem);
+    --font-size-xl: clamp(1.71rem, 0.81vw + 1.55rem, 2.52rem);
+    --font-size-xxl: clamp(2.14rem, 1.22vw + 1.89rem, 3.35rem);
+    --font-size-xxxl: clamp(2.67rem, 1.8vw + 2.31rem, 4.47rem);
+  }
+}
+
+/* Fallback variables for browsers that don't support clamp */
+@supports not (font-size: clamp(1rem, 1vw, 1rem)) {
+  :root {
+    --font-size-sm: 0.7rem;
+    --font-size-base: 0.88rem;
+    --font-size-md: 1.09rem;
+    --font-size-lg: 1.37rem;
+    --font-size-xl: 1.71rem;
+    --font-size-xxl: 2.14rem;
+    --font-size-xxxl: 2.67rem;
+  }
+  @media screen and (min-width: 1920px) {
+    :root {
+      --font-size-sm: 0.8rem;
+      --font-size-base: 1.06rem;
+      --font-size-md: 1.42rem;
+      --font-size-lg: 1.89rem;
+      --font-size-xl: 2.52rem;
+      --font-size-xxl: 3.35rem;
+      --font-size-xxxl: 4.47rem;
+    }
+  }
+}
