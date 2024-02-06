@@ -1,0 +1,59 @@
+.mainLayout {
+  display: flex;
+  overflow: unset;
+  background-size: cover;
+  min-height: 100dvh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding-bottom: 15px;
+  margin-top: 68px;
+}
+
+.sideBar {
+  width: 270px;
+  margin-right: 0;
+  overflow: hidden;
+}
+
+.sideBar,
+.sideBarOpen {
+  flex-shrink: 0;
+}
+
+.contentNavBar {
+  width: 100%;
+}
+
+.outlet {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .sideBar {
+    transition: all 0.25s ease;
+    opacity: 0;
+    transform: translateX(-280px);
+  }
+
+  .outlet {
+    padding-inline: 10px;
+  }
+
+  .sideBar,
+  .sideBarOpen {
+    z-index: 999;
+    position: fixed;
+    top: 68px;
+    height: 100%;
+    background: #f5f6fa;
+  }
+
+  .sideBarOpen {
+    width: 270px;
+    opacity: 1;
+    transform: translateX(0px);
+    transition: all 0.25s ease;
+  }
+}
