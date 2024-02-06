@@ -47,18 +47,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     <div className={Style.sideBarWrapper}>
       <div className={Style.sideBar}>
         <div>
-          <div className={Style.logoWrapper}>
-            <div
-              className={Style.hamburgerActive}
-              onClick={() => {
-                setSidebarIsOpen((old: boolean) => !old);
-              }}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
           <SidebarLinks
             setSidebarIsOpen={setSidebarIsOpen}
             sidebarIsOpen={sidebarIsOpen}
