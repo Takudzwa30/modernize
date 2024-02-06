@@ -1,24 +1,25 @@
 "use client";
 
-// Hooks
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-
 // Libraries
-import Link from "next/link";
+import Image from "next/image";
 
-// Routes
-import { sidebarCategories } from "@/data/routes";
+// Hooks
+import useWindowSize from "@/hooks/useWindowSize";
 
 // Icons
-import { IoPerson, IoNotifications, IoSearch } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
+import { GrChat } from "react-icons/gr";
+import { GoBell } from "react-icons/go";
 
 // Logo
 import logo from "@/assets/logos/logo.png";
+import logoHalf from "@/assets/logos/logoHalf.png";
+
+// Images
+import avatar from "@/assets/images/avatar.png";
 
 // Styles
 import Style from "./Navbar.module.css";
-import Image from "next/image";
 
 // Types
 interface SidebarProps {
@@ -30,54 +31,30 @@ const Navbar: React.FC<SidebarProps> = ({
   sidebarIsOpen,
   setSidebarIsOpen,
 }) => {
-  // Hooks
-  const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
-
-  // Functions
-  const getPageTitle = (currentPath: string) => {
-    for (const category of sidebarCategories) {
-      for (const route of category.routes) {
-        if (route.path === currentPath) {
-          return route.title;
-        }
-      }
-    }
-    return "Unknown Page";
-  };
-
-  const pageTitle = getPageTitle(pathname);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window?.scrollY > 0;
-      setIsScrolled(scrolled);
-    };
-    window?.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window?.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+  const { width } = useWindowSize();
+  const logoImage = width && width > 767 ? logo : logoHalf;
   return (
-    <div
-      className={
-        // isScrolled ? Style.navBarScrolled :
-        Style.navBarWrapper
-      }
-    >
-      <Image src={logo} alt="Logo" />
-      <div className={Style.nav}>
+    <div className={Style.navBarWrapper}>
+      <div className={Style.leftNav}>
+        <Image src={logoImage} alt="Logo" />
         <div className={Style.searchFieldWrapper}>
           <IoSearch />
-          <input placeholder="Type here..." type="text" />
+          <input placeholder="Search..." type="text" />
         </div>
-        <Link href={"/signin"} className={Style.signin}>
-          <IoPerson />
-          <p>Sign In</p>
-        </Link>
-        <IoNotifications className={Style.navIcon} />
+      </div>
+      <div className={Style.nav}>
+        <div className={Style.messages}>
+          <GrChat />
+          <div className={Style.notificationsValue}>2</div>
+        </div>
+        <div className={Style.messages}>
+          <GoBell />
+          <div className={Style.notificationsValue}>5</div>
+        </div>
+        <div className={Style.user}>
+          <Image src={avatar} alt="profile picture" />
+          <p>X’eriya Ponald</p>
+        </div>
         <div
           className={sidebarIsOpen ? Style.hamburgerActive : Style.hamburger}
           onClick={() => {

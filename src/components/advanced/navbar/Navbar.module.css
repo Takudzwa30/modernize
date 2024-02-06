@@ -1,6 +1,5 @@
 .navBarWrapper {
   padding: 15px;
-  /* margin-bottom: 1.875rem; */
   transition: all 0.1s ease;
   position: relative;
   background: #fff;
@@ -9,6 +8,14 @@
   top: 0;
   left: 0;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftNav {
+  display: flex;
+  gap: 140px;
 }
 
 .navBarScrolled,
@@ -45,40 +52,85 @@
   gap: 20px;
   align-items: center;
 }
+.messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.messages:hover svg {
+  color: #1e5eff;
+}
+
+.messages svg {
+  color: #151b26;
+  width: 20px;
+  height: 20px;
+}
+
+.notificationsValue {
+  position: absolute;
+  left: 9px;
+  top: -5px;
+  background: #1e5eff;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
 
 .searchFieldWrapper {
   padding: 10px;
   border-radius: 15px;
-  border: 0.5px solid rgba(226, 232, 240, 0.3);
-  background: #0f1535;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   transition: 0.3s all ease;
+  border: 0.5px solid transparent;
 }
 
 .searchFieldWrapper svg {
-  color: #2d3748;
+  color: #7e84a3;
   cursor: pointer;
   transition: 0.3s all ease;
+  width: 20px;
+  height: 18px;
 }
 
 .searchFieldWrapper input {
   outline: none;
   background: transparent;
   border: none;
-  color: #fff;
 }
 
 .searchFieldWrapper input::placeholder {
-  color: #a0aec0;
+  color: #7e84a3;
   font-size: 12px;
   font-weight: 400;
   line-height: normal;
 }
 
 .searchFieldWrapper:focus-within {
-  border: 0.5px solid rgba(226, 232, 240, 0.6);
+  border: 0.5px solid #7e84a3;
 }
 
 .signin,
@@ -125,6 +177,14 @@
     right: -5px;
   }
 
+  .leftNav {
+    gap: 50px;
+  }
+
+  .user p {
+    display: none;
+  }
+
   .hamburger,
   .hamburgerActive {
     position: relative;
@@ -157,8 +217,7 @@
 }
 
 @media screen and (max-width: 576px) {
-  .navBarScrolled,
-  .navBarWrapper {
+  .navBarScrolled {
     justify-content: flex-end;
   }
 
@@ -166,8 +225,12 @@
     padding: 15px;
   }
 
+  .searchFieldWrapper {
+    display: none;
+  }
+
   .nav {
-    gap: 10px;
+    /* gap: 10px; */
   }
 
   .signin p,
