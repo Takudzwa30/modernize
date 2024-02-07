@@ -1,0 +1,27 @@
+.tableCompany {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tableCompany img {
+  width: 25px;
+  height: 25px;
+}
+
+.membersImage {
+  max-height: 23px;
+  height: 100%;
+}
+
+.completionWrapper {
+  background: #2d2e5f;
+  width: 125px;
+  height: 3px;
+  margin-top: 3px;
+}
+
+.completion {
+  background: #0075ff;
+  height: 100%;
+}

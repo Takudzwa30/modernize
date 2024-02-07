@@ -49,7 +49,9 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        {/* <LayoutWrapper> */}
+          {children}
+          {/* </LayoutWrapper> */}
       </body>
     </html>
   );

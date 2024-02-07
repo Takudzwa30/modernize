@@ -38,7 +38,7 @@ html {
 }
 
 body {
-  background: #f5f6fa;
+  background: #000;
   scroll-behavior: smooth;
   font-size: var(--font-size-base);
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -129,4 +129,46 @@ a {
       --font-size-xxxl: 4.47rem;
     }
   }
+}
+
+.MuiFormLabel-root {
+  color: #fff;
+}
+
+.MuiSvgIcon-root {
+  fill: #fff !important;
+}
+
+.Mui-selected {
+  border-color: white !important;
+  color: #2196f3 !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.3s ease;
+}
+
+.MuiTableContainer-root {
+  padding-bottom: 10px;
+}
+
+.MuiTableContainer-root::-webkit-scrollbar {
+  height: 3px;
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-thumb {
+  background-color: #2196f3;
+  border-radius: 6px;
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-track {
+  margin-block: 10px;
+  background-color: #1e1e1e;
+}
+
+.MuiPaper-root .MuiPaper-elevation {
+  background-color: transparent;
+  color: #fff;
 }
