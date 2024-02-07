@@ -104,7 +104,7 @@ export const data = {
 const Chart = () => {
   return (
     <Card>
-      <h4 className={Style.title}>Unique Visits Over Time</h4>
+      <h6 className={Style.title}>Unique Visits Over Time</h6>
       <Line options={options} data={data} />
     </Card>
   );
