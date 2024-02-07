@@ -10,11 +10,7 @@ import { sidebarCategories } from "@/data/routes";
 // Styles
 import Style from "./LayoutWrapper.module.css";
 
-interface LayoutWrapperProps {
-  children: ReactNode;
-}
-
-const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
+const LayoutWrapper = ({ children }) => {
   // States
   const [menuOpen, setMenuOpen] = useState(false);
 
