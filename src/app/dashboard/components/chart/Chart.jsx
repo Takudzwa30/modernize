@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import Card from "@/components/ui/card/Card";
+import Style from "./Chart.module.css";
 
 ChartJS.register(
   CategoryScale,
@@ -103,6 +104,7 @@ export const data = {
 const Chart = () => {
   return (
     <Card>
+      <h4 className={Style.title}>Unique Visits Over Time</h4>
       <Line options={options} data={data} />
     </Card>
   );
