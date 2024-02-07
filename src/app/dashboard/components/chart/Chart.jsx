@@ -58,8 +58,8 @@ export const options = {
       caretPadding: 8,
     },
     legend: {
-      position: "top" as const,
-      align: "start" as const,
+      position: "top",
+      align: "start",
       labels: {
         lineWidth: 0,
         boxWidth: 10,
