@@ -164,7 +164,7 @@ const Country: React.FC = () => {
 
   return (
     <Card>
-      <h6 className={Style.title}> Recent Transactions</h6>
+      <h6 className={Style.title}>Distribution by Country</h6>
       <ThemeProvider theme={tableTheme}>
         <MaterialReactTable table={table} />
       </ThemeProvider>
