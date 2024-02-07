@@ -1,7 +1,21 @@
 // Icons
 import { IoDocument } from "react-icons/io5";
-import { IoHome, IoStatsChartSharp, IoPerson, IoRocketSharp } from "react-icons/io5";
-import { BsFillCreditCardFill } from "react-icons/bs";
+import {
+  IoHome,
+  IoStatsChartSharp,
+  IoPerson,
+  IoRocketSharp,
+} from "react-icons/io5";
+import { GrChat } from "react-icons/gr";
+import { FaRegFolder, FaRegCircleQuestion } from "react-icons/fa6";
+import { IoStarOutline } from "react-icons/io5";
+import { PiChartBarBold } from "react-icons/pi";
+import { HiOutlineUsers, HiOutlineUser } from "react-icons/hi2";
+import { IoPricetagOutline } from "react-icons/io5";
+import { TfiMenuAlt } from "react-icons/tfi";
+import { FiHome, FiAward } from "react-icons/fi";
+import { LuSettings } from "react-icons/lu";
+
 
 export const sidebarCategories = [
   {
@@ -10,42 +24,72 @@ export const sidebarCategories = [
         path: "/",
         title: "Dashboard",
         subRoutes: [],
-        icon: <IoHome />,
+        icon: <FiHome />,
       },
       {
-        path: "/tables",
-        title: "Tables",
+        title: "Orders",
         subRoutes: [],
-        icon: <IoStatsChartSharp />,
+        icon: <TfiMenuAlt />,
       },
       {
-        path: "/billing",
-        title: "Billing",
+        title: "Products",
         subRoutes: [],
-        icon: <BsFillCreditCardFill />,
+        icon: <IoPricetagOutline />,
+      },
+      {
+        title: "Categories",
+        subRoutes: [],
+        icon: <FaRegFolder />,
+      },
+      {
+        title: "Customers",
+        subRoutes: [],
+        icon: <HiOutlineUsers />,
+      },
+      {
+        title: "Reports",
+        subRoutes: [],
+        icon: <PiChartBarBold />,
+      },
+      {
+        title: "Coupons",
+        subRoutes: [],
+        icon: <IoStarOutline />,
+      },
+      {
+        title: "Inbox",
+        subRoutes: [],
+        icon: <GrChat />,
       },
     ],
   },
   {
-    categoryTitle: "Account",
+    categoryTitle: "Other Information",
     routes: [
       {
-        path: "/profile",
-        title: "Profile",
+        title: "Knowledge Base",
         subRoutes: [],
-        icon: <IoPerson />,
+        icon: <FaRegCircleQuestion />,
       },
       {
-        path: "/signin",
-        title: "Sign In",
+        title: "Product Updates",
         subRoutes: [],
-        icon: <IoDocument />,
+        icon: <FiAward />,
+      },
+    ],
+  },
+  {
+    categoryTitle: "Settings",
+    routes: [
+      {
+        title: "Personal Settings",
+        subRoutes: [],
+        icon: <HiOutlineUser />,
       },
       {
-        path: "/signup",
-        title: "Sign Up",
+        title: "Global Settings",
         subRoutes: [],
-        icon: <IoRocketSharp />,
+        icon: <LuSettings />,
       },
     ],
   },

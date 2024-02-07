@@ -45,8 +45,8 @@
   margin-block: 30px 10px;
 }
 
-.linkWrapper{
-  color: #7E84A3;
+.linkWrapper {
+  color: #7e84a3;
 }
 
 .linkWrapper,
@@ -93,11 +93,12 @@
 }
 
 .sideBarBottom {
-  background: #0075ff;
+  background: url("../../../assets/images/Banner.png") center / cover no-repeat;
+  width: 100%;
   border-radius: 15px;
   width: 100%;
   margin-top: auto;
-  padding: 20px;
+  padding-top: 165px;
 }
 
 .help {

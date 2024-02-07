@@ -38,7 +38,7 @@ html {
 }
 
 body {
-  background: #000;
+  /* background: #000; */
   scroll-behavior: smooth;
   font-size: var(--font-size-base);
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -142,16 +142,13 @@ a {
 .Mui-selected {
   border-color: white !important;
   color: #2196f3 !important;
-  background-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .MuiOutlinedInput-notchedOutline {
-  border-color: rgba(255, 255, 255, 0.3) !important;
   transition: all 0.3s ease;
 }
 
 .MuiTableContainer-root {
-  padding-bottom: 10px;
 }
 
 .MuiTableContainer-root::-webkit-scrollbar {

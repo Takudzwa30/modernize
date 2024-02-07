@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // Styles
-import Style from "./LoaderWrapper.module.css";
+import Style from "./Loader.module.css";
 
 type LoaderProps = {
   children: React.ReactNode;

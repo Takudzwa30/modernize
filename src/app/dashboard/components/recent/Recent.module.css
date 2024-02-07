@@ -1,0 +1,24 @@
+.title {
+  margin-bottom: 20px;
+  color: #131523;
+}
+
+.pending,
+.paid {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  width: 80px;
+  border-radius: 4px;
+  padding-block: 2px;
+}
+
+.paid {
+  background: #c4f8e2;
+  color: #06a561;
+}
+
+.pending {
+  background: #e6e9f4;
+  color: #5a607f;
+}

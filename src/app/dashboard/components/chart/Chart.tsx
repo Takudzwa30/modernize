@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Card from "@/components/ui/card/Card";
 
 ChartJS.register(
   CategoryScale,
@@ -41,13 +42,10 @@ export const options = {
       },
     },
   },
-  layout: {
-    padding: {
-      top: 50,
-    },
-  },
   responsive: true,
   plugins: {
+    maintainAspectRatio: true,
+    responsive: true,
     tooltip: {
       yAlign: "bottom",
       xAlign: "center",
@@ -104,9 +102,9 @@ export const data = {
 
 const Chart = () => {
   return (
-    <div>
+    <Card>
       <Line options={options} data={data} />
-    </div>
+    </Card>
   );
 };
 

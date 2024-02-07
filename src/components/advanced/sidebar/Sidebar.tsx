@@ -54,12 +54,12 @@ const Sidebar: React.FC<SidebarProps> = ({
           />
         </div>
         <div className={Style.sideBarBottom}>
-          <div className={Style.help}>
+          {/* <div className={Style.help}>
             <IoHelpCircle />
           </div>
           <h5>Need help?</h5>
           <h6>Please get in touch</h6>
-          <div className={Style.documentation}>CONTACT SUPPORT</div>
+          <div className={Style.documentation}>CONTACT SUPPORT</div> */}
         </div>
       </div>
     </div>
@@ -109,18 +109,41 @@ const NavMenu: React.FC<NavMenuProps> = ({ route, setSidebarIsOpen }) => {
   const pathname = usePathname();
 
   return (
-    <Link
-      className={
-        pathname === route.path ? Style.linkWrapperActive : Style.linkWrapper
-      }
-      href={route.path}
-      onClick={() => {
-        setSidebarIsOpen(false);
-      }}
-    >
-      <>{route.icon} </>
-      <div className={Style.linkTitle}>{route.title}</div>
-    </Link>
+    <>
+      {route.path ? (
+        <Link
+          className={
+            pathname === route.path
+              ? Style.linkWrapperActive
+              : Style.linkWrapper
+          }
+          href={route.path}
+          onClick={() => {
+            setSidebarIsOpen(false);
+          }}
+        >
+          <>{route.icon} </>
+          <div className={Style.linkTitle}>{route.title}</div>
+        </Link>
+      ) : (
+        <div
+          className={
+            pathname === route.path
+              ? Style.linkWrapperActive
+              : Style.linkWrapper
+          }
+          onClick={() => {
+            setSidebarIsOpen(false);
+          }}
+          style={{
+            cursor: "not-allowed",
+          }}
+        >
+          <>{route.icon} </>
+          <div className={Style.linkTitle}>{route.title}</div>
+        </div>
+      )}
+    </>
   );
 };
 
