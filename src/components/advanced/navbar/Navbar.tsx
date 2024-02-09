@@ -1,6 +1,7 @@
 "use client";
 
 // Libraries
+import { useState } from "react";
 import Image from "next/image";
 
 // Hooks
@@ -10,6 +11,9 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { IoSearch } from "react-icons/io5";
 import { GrChat } from "react-icons/gr";
 import { GoBell } from "react-icons/go";
+import { BiChevronDown } from "react-icons/bi";
+import { MdLogout } from "react-icons/md";
+import { HiOutlineUser } from "react-icons/hi2";
 
 // Logo
 import logo from "@/assets/logos/logo.png";
@@ -33,6 +37,7 @@ const Navbar: React.FC<SidebarProps> = ({
 }) => {
   const { width } = useWindowSize();
   const logoImage = width && width > 767 ? logo : logoHalf;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
     <div className={Style.navBarWrapper}>
       <div className={Style.leftNav}>
@@ -51,10 +56,47 @@ const Navbar: React.FC<SidebarProps> = ({
           <GoBell />
           <div className={Style.notificationsValue}>5</div>
         </div>
-        <div className={Style.user}>
-          <Image src={avatar} alt="profile picture" />
-          <p>X’eriya Ponald</p>
+
+        <div
+          className={Style.avatar}
+          onClick={() => setDropdownOpen((old) => !old)}
+        >
+          <div
+            className={Style.picture}
+            style={{
+              backgroundImage: `url(${avatar.src})`,
+            }}
+          />
+          <div
+            className={dropdownOpen ? Style.menuOpen : Style.menu}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
+            <div className={Style.content}>
+              <div className={Style.title}>
+                Welcome! <br />
+                <span>@xeriya </span>
+              </div>
+              <div className={Style.bid}>
+                <div className={Style.id}>ID: 4234234</div>
+              </div>
+              <div className={Style.item}>
+                <HiOutlineUser />
+                Go to profile
+              </div>
+              <div className={Style.item}>
+                <MdLogout />
+                Logout
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className={!dropdownOpen ? Style.action : Style.actionOpen}>
+              <div className={Style.username}>X’eriya Ponald</div>
+              <BiChevronDown />
+            </div>
+          </div>
         </div>
+
         <div
           className={sidebarIsOpen ? Style.hamburgerActive : Style.hamburger}
           onClick={() => {
