@@ -1,0 +1,29 @@
+.cards p {
+  color: #5a607f;
+}
+
+.cards h5 {
+  margin-block: 5px 10px;
+  color: #131523;
+}
+
+.increase,
+.decrease {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.increase,
+.increase p {
+  color: #06a561;
+}
+
+.increase svg {
+  rotate: 180deg;
+}
+
+.decrease,
+.decrease p {
+  color: #f0142f;
+}
