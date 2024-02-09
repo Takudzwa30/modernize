@@ -5,7 +5,6 @@
   min-height: 100dvh;
   background-position: center center;
   background-repeat: no-repeat;
-  /* padding-bottom: 15px; */
   margin-top: 70px;
 }
 
@@ -24,6 +23,11 @@
 .contentNavBar {
   width: 100%;
   background: #f5f6fa;
+}
+
+.navBarWrapper{
+  background: white;
+  z-index: 2342342343233243432;
 }
 
 .outlet {

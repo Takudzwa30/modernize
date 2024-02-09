@@ -15,11 +15,11 @@ const LayoutWrapper = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div>
-      <div className={Style.navBarWrapper}>
-        <Navbar sidebarIsOpen={menuOpen} setSidebarIsOpen={setMenuOpen} />
-      </div>
+    <>
       <div className={Style.mainLayout}>
+        <div className={Style.navBarWrapper}>
+          <Navbar sidebarIsOpen={menuOpen} setSidebarIsOpen={setMenuOpen} />
+        </div>
         <div className={menuOpen ? Style.sideBarOpen : Style.sideBar}>
           <Sidebar
             sidebarIsOpen={menuOpen}
@@ -31,7 +31,7 @@ const LayoutWrapper = ({ children }) => {
           <div className={Style.outlet}>{children}</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

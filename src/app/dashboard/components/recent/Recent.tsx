@@ -10,11 +10,10 @@ import {
 } from "material-react-table";
 
 // Components
-import { StaticImageData } from "next/image";
+import Card from "@/components/ui/card/Card";
 
 // Styles
 import Style from "./Recent.module.css";
-import Card from "@/components/ui/card/Card";
 
 // Types
 type RecentTypes = {
@@ -89,7 +88,6 @@ const Recent: React.FC = () => {
     return `${dayStr}.${monthStr}.${year}`;
   }
 
-  // should be memoized or stable
   const columns = useMemo<MRT_ColumnDef<RecentTypes>[]>(
     () => [
       {
