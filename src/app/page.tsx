@@ -9,6 +9,7 @@ import { LuSettings } from "react-icons/lu";
 
 // Styles
 import Style from "./page.module.css";
+import { Loader } from "@/components/advanced";
 
 // Types
 interface CardProps {
@@ -55,7 +56,7 @@ const data: DataItem[] = [
 
 export default function Home() {
   return (
-    <>
+    <Loader>
       <div className={Style.titleWrapper}>
         <h4>Dashboard</h4>
         <div className={Style.manage}>
@@ -81,6 +82,6 @@ export default function Home() {
         <Recent />
         <Country />
       </section>
-    </>
+    </Loader>
   );
 }

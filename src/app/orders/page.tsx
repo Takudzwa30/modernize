@@ -2,6 +2,7 @@ import { Metadata } from "next";
 
 // Components
 import OrdersView from "./OrdersView";
+import Loader from "@/components/advanced/loader/Loader";
 
 export const metadata: Metadata = {
   title: "Orders",
@@ -9,9 +10,9 @@ export const metadata: Metadata = {
 
 const Billing: React.FC = () => {
   return (
-    // <LoaderWrapper>
+    <Loader>
       <OrdersView />
-    // </LoaderWrapper>
+    </Loader>
   );
 };
 
