@@ -1,0 +1,72 @@
+.title {
+  margin-bottom: 20px;
+  color: #131523;
+}
+
+.country,
+.wrapperPercentage {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.country img {
+  width: 25px;
+  height: 25px;
+}
+
+.completionWrapper {
+  background: #d7dbec;
+  width: 125px;
+  height: 8px;
+  border-radius: 5px;
+  margin-top: 3px;
+}
+
+.completion {
+  border-radius: 5px;
+  background: #1e5eff;
+  height: 100%;
+}
+
+.paid,
+.pending,
+.ready,
+.shipped,
+.received {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding-block: 2px;
+  text-transform: capitalize;
+}
+
+.paid {
+  color: #06a561;
+  background: #c4f8e2;
+}
+
+.pending {
+  color: #5a607f;
+  background: #e6e9f4;
+}
+
+.ready,
+.received,
+.shipped {
+  color: #ffffff;
+}
+
+.ready {
+  background: #f99600;
+}
+
+.shipped {
+  background: #5a607f;
+}
+
+.received {
+  background: #1e5eff;
+}
