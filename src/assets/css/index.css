@@ -132,23 +132,45 @@ a {
 }
 
 .MuiFormLabel-root {
-  color: #fff;
+  color: #000;
 }
 
 .MuiSvgIcon-root {
-  fill: #fff !important;
+  fill: #7e84a3 !important;
 }
 
-.Mui-selected {
-  border-color: white !important;
-  color: #2196f3 !important;
+.MuiButtonBase-root {
+  color: #000;
+}
+
+.MuiSelect-select {
+  color: #000;
+}
+
+.MuiList-root {
+  background-color: #fff;
 }
 
 .MuiOutlinedInput-notchedOutline {
   transition: all 0.3s ease;
 }
 
-.MuiTableContainer-root {
+.MuiPaginationItem-root {
+  color: #5a607f;
+}
+
+.MuiPagination-text {
+  color: red !important;
+}
+
+.MuiOutlinedInput-input {
+  color: #5a607f;
+}
+
+.Mui-selected {
+  border-color: transparent !important;
+  color: #2196f3 !important;
+  background: #ecf2ff !important;
 }
 
 .MuiTableContainer-root::-webkit-scrollbar {
@@ -167,5 +189,5 @@ a {
 
 .MuiPaper-root .MuiPaper-elevation {
   background-color: transparent;
-  color: #fff;
+  color: #000;
 }
