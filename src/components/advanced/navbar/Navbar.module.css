@@ -142,7 +142,6 @@
   opacity: 0;
   visibility: hidden;
   width: 250px;
-  /* background: white; */
 }
 
 .menuOpen {
@@ -157,7 +156,6 @@
   background: rgba(255, 255, 255);
   padding-block: 15px;
   border: 1px solid #d9e1ec;
-  /* border-top: none; */
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -354,7 +352,6 @@
   .menu,
   .menuOpen {
     width: 200px;
-    /* top: 50px; */
   }
 
   .navBarScrolled {
