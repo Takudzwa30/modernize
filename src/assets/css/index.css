@@ -144,7 +144,7 @@ a {
 }
 
 .MuiButtonBase-root {
-  color: #000;
+  color: #000 !important;
 }
 
 .MuiSelect-select {
