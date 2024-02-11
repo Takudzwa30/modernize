@@ -130,6 +130,10 @@ a {
     }
   }
 }
+.MuiNativeSelect-select {
+  color: #000 !important;
+}
+/* MuiNativeSelect-standard MuiInputBase-input MuiInput-input css-1ccjlzk" */
 
 .MuiFormLabel-root {
   color: #000 !important;
@@ -144,7 +148,7 @@ a {
 }
 
 .MuiSelect-select {
-  color: #000;
+  color: #000 !important;
 }
 
 .MuiList-root {
