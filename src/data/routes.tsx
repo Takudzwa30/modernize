@@ -1,11 +1,4 @@
-// Icons
-import { IoDocument } from "react-icons/io5";
-import {
-  IoHome,
-  IoStatsChartSharp,
-  IoPerson,
-  IoRocketSharp,
-} from "react-icons/io5";
+// IconsÍ
 import { GrChat } from "react-icons/gr";
 import { FaRegFolder, FaRegCircleQuestion } from "react-icons/fa6";
 import { IoStarOutline } from "react-icons/io5";
@@ -15,7 +8,6 @@ import { IoPricetagOutline } from "react-icons/io5";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { FiHome, FiAward } from "react-icons/fi";
 import { LuSettings } from "react-icons/lu";
-
 
 export const sidebarCategories = [
   {
@@ -27,6 +19,7 @@ export const sidebarCategories = [
         icon: <FiHome />,
       },
       {
+        path: "/orders",
         title: "Orders",
         subRoutes: [],
         icon: <TfiMenuAlt />,
