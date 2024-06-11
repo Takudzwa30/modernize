@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 
-// Components
-import LayoutWrapper from "@/components/advanced/layoutWrapper/LayoutWrapper";
-
 // Fonts
 import { Inter } from "next/font/google";
 
@@ -48,11 +45,7 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className}>
-        <LayoutWrapper>
-          {children}
-          </LayoutWrapper>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
