@@ -6,6 +6,7 @@ import Image from "next/image";
 
 // Hooks
 import useWindowSize from "@/hooks/useWindowSize";
+import { useUser } from "@/contexts/UserContext";
 
 // Icons
 import { IoSearch } from "react-icons/io5";
@@ -20,7 +21,7 @@ import logo from "@/assets/logos/logo.png";
 import logoHalf from "@/assets/logos/logoHalf.png";
 
 // Images
-import avatar from "@/assets/images/avatar.png";
+import dummyProfile from "@/assets/images/profileDummy.png";
 
 // Styles
 import Style from "./Navbar.module.css";
@@ -38,6 +39,9 @@ const Navbar: React.FC<SidebarProps> = ({
   const { width } = useWindowSize();
   const logoImage = width && width > 767 ? logo : logoHalf;
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, signOutUser, verifyEmail } = useUser();
+
+
   return (
     <div className={Style.navBarWrapper}>
       <div className={Style.leftNav}>
@@ -64,7 +68,9 @@ const Navbar: React.FC<SidebarProps> = ({
           <div
             className={Style.picture}
             style={{
-              backgroundImage: `url(${avatar.src})`,
+              backgroundImage: user?.photoURL
+                ? `url(${user.photoURL && user.photoURL})`
+                : `url(${dummyProfile.src})`,
             }}
           />
           <div
@@ -83,7 +89,20 @@ const Navbar: React.FC<SidebarProps> = ({
                 <HiOutlineUser />
                 Go to profile
               </div>
-              <div className={Style.item}>
+              <div
+                style={{
+                  margin: "40px",
+                  color: "blue",
+                  border: "1px solid blue",
+                  padding: "4px 8px",
+                  borderRadius: "4px",
+                  width: "fit-content",
+                }}
+                onClick={verifyEmail}
+              >
+                VERIFY
+              </div>
+              <div onClick={signOutUser} className={Style.item}>
                 <MdLogout />
                 Logout
               </div>
@@ -91,7 +110,7 @@ const Navbar: React.FC<SidebarProps> = ({
           </div>
           <div>
             <div className={!dropdownOpen ? Style.action : Style.actionOpen}>
-              <div className={Style.username}>X’eriya Ponald</div>
+              <div className={Style.username}>{user?.displayName}</div>
               <BiChevronDown />
             </div>
           </div>
