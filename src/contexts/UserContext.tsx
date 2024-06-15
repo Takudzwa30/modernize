@@ -18,6 +18,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   sendEmailVerification,
+  createUserWithEmailAndPassword,
   User as FirebaseUser,
 } from "firebase/auth";
 import { app } from "../../firebaseConfig";
@@ -29,6 +30,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<void>;
   signOutUser: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   verifyEmail: () => Promise<void>;
 }
@@ -88,6 +90,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   };
 
+  const signUp = async (email: string, password: string) => {
+    try {
+      await createUserWithEmailAndPassword(getAuth(app), email, password);
+    } catch (error) {
+      console.error("Sign up error:", error);
+      throw error;
+    }
+  };
+
   const signInWithGoogle = async () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
@@ -141,6 +152,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         signIn,
         signInWithGoogle,
+        signUp,
         signOutUser,
         resetPassword,
         verifyEmail,
