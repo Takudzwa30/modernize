@@ -1,0 +1,17 @@
+.googleLogin {
+  border: 1px solid #d7dbec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 25px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 400;
+  color: #1e5eff;
+  transition: all 0.3s ease;
+}
+
+.googleLogin:hover {
+  border: 1px solid #1e5eff;
+}
