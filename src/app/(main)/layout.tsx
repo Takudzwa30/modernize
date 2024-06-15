@@ -1,10 +1,15 @@
 "use client";
 
-// Components
 import { useEffect } from "react";
+
+// Libraries
 import { useRouter } from "next/navigation";
-import LayoutWrapper from "@/components/advanced/layoutWrapper/LayoutWrapper";
+
+// Contexts
 import { useUser } from "@/contexts/UserContext";
+
+// Components
+import LayoutWrapper from "@/components/advanced/layoutWrapper/LayoutWrapper";
 import { LoaderComponent } from "@/components/advanced/loader/Loader";
 
 export default function MainLayout({
@@ -18,7 +23,7 @@ export default function MainLayout({
   useEffect(() => {
     // Redirect to login page if user is not logged in
     if (!user) {
-      router.push("/auth/create-account");
+      router.push("/auth/login");
     }
   }, [user, router]);
 
