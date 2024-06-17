@@ -128,7 +128,7 @@ const CreateAccountView: React.FC = () => {
       <p className={Style.useALt}>Or create an account using:</p>
 
       <LoginWithGoogle />
-
+{/* 
       <div>
         <div
           style={{
@@ -170,7 +170,7 @@ const CreateAccountView: React.FC = () => {
         >
           VERIFY
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
