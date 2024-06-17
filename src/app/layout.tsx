@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 
-// Components
-import LayoutWrapper from "@/components/advanced/layoutWrapper/LayoutWrapper";
-
 // Fonts
 import { Inter } from "next/font/google";
 
 // Styles
 import "@/assets/css/index.css";
+import { UserProvider } from "@/contexts/UserContext";
 
 // Variables
 const inter = Inter({ subsets: ["latin"] });
@@ -49,9 +47,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className}>
-        <LayoutWrapper>
-          {children}
-          </LayoutWrapper>
+        <UserProvider>{children}</UserProvider>
       </body>
     </html>
   );

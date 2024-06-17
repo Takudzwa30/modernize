@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/dashboard/components/chart/Chart.jsx", "src/components/advanced/layoutWrapper/LayoutWrapper.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(main)/dashboard/components/chart/Chart.jsx", "src/components/advanced/layoutWrapper/LayoutWrapper.jsx"],
   "exclude": ["node_modules"]
 }

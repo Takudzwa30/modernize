@@ -212,8 +212,9 @@
 }
 
 .picture {
-  height: 45px;
-  width: 45px;
+  width: 36px;
+  height: 36px;
+  gap: 0px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -223,7 +224,6 @@
 .actionOpen {
   display: flex;
   align-items: center;
-  column-gap: 8px;
   cursor: pointer;
 }
 
@@ -231,11 +231,11 @@
 .actionOpen svg {
   flex-shrink: 0;
   transition: all 0.3s ease;
+  font-size: 20px;
 }
 
 .actionOpen svg {
   transform: rotate(180deg);
-  font-size: 20px;
 }
 
 .username {
@@ -244,10 +244,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.action svg {
-  font-size: 20px;
 }
 
 .time .label {

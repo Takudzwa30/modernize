@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Styles
 import Style from "./Loader.module.css";
@@ -10,6 +11,7 @@ type LoaderProps = {
 
 const Loader: React.FC<LoaderProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -31,7 +33,12 @@ const Loader: React.FC<LoaderProps> = ({ children }) => {
   return (
     <div className={Style.loaderWrapper}>
       {loading && (
-        <div className={Style.loaderContainer}>
+        <div
+          style={{
+            height: pathname.includes("auth") ? "100%" : "",
+          }}
+          className={Style.loaderContainer}
+        >
           <LoaderComponent />
         </div>
       )}
@@ -40,7 +47,7 @@ const Loader: React.FC<LoaderProps> = ({ children }) => {
   );
 };
 
-const LoaderComponent: React.FC = () => {
+export const LoaderComponent: React.FC = () => {
   return <div className={Style.loader}></div>;
 };
 
