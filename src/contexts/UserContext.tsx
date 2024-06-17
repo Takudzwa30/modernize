@@ -35,7 +35,6 @@ interface AuthContextType {
   verifyEmail: () => Promise<void>;
 }
 
-console.log(app);
 
 const UserContext = createContext<AuthContextType | undefined>(undefined);
 
