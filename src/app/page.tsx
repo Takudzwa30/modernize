@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 const Home: React.FC = () => {
+  console.log(process.env.AUTH_DOMAIN);
+
   return (
     <MainLayout>
       <Loader>
