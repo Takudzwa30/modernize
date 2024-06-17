@@ -121,12 +121,7 @@ const ResetPasswordView: React.FC = () => {
               </Form>
             )}
           </Formik>
-          <div className={Style.forgotPassword}>
-            <Link href="/auth/reset-password">Forgot your password?</Link>
-          </div>
-
           <div className={Style.divider} />
-
           <p className={Style.useALt}>Remembered your Password?</p>
           <div
             className={Style.googleLogin}
