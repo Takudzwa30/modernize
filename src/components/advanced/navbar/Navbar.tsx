@@ -41,7 +41,6 @@ const Navbar: React.FC<SidebarProps> = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, signOutUser, verifyEmail } = useUser();
 
-
   return (
     <div className={Style.navBarWrapper}>
       <div className={Style.leftNav}>
@@ -88,19 +87,6 @@ const Navbar: React.FC<SidebarProps> = ({
               <div className={Style.item}>
                 <HiOutlineUser />
                 Go to profile
-              </div>
-              <div
-                style={{
-                  margin: "40px",
-                  color: "blue",
-                  border: "1px solid blue",
-                  padding: "4px 8px",
-                  borderRadius: "4px",
-                  width: "fit-content",
-                }}
-                onClick={verifyEmail}
-              >
-                VERIFY
               </div>
               <div onClick={signOutUser} className={Style.item}>
                 <MdLogout />
