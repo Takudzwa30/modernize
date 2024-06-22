@@ -3,9 +3,15 @@ import type { Metadata } from "next";
 // Fonts
 import { Inter } from "next/font/google";
 
+// Contexts
+import { UserProvider } from "@/contexts/UserContext";
+import { ModalProvider } from "@/contexts/ModalContext";
+
+// Components
+import { Modal } from "@/components/advanced";
+
 // Styles
 import "@/assets/css/index.css";
-import { UserProvider } from "@/contexts/UserContext";
 
 // Variables
 const inter = Inter({ subsets: ["latin"] });
@@ -47,7 +53,12 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className}>
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <ModalProvider>
+            {children}
+            <Modal />
+          </ModalProvider>
+        </UserProvider>
       </body>
     </html>
   );

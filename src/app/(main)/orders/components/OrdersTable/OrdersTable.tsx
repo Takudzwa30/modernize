@@ -11,75 +11,26 @@ import {
 
 // Components
 import Card from "@/components/ui/card/Card";
-import Image, { StaticImageData } from "next/image";
-
-// Images
-import usFlag from "@/assets/images/US.png";
+import { AddOrder } from "@/components/modals";
 
 // Styles
 import Style from "./OrdersTable.module.css";
 
 // Types
-type RecentTypes = {
-  order: string;
-  percentage: number;
+ type RecentTypes = {
+  orderNumber: string;
   date: Date;
   customer: string;
-  paymentStatus: boolean;
+  paymentStatus: string;
   orderStatus: string;
   amount: number;
 };
 
-// Data
-const data: RecentTypes[] = [
-  {
-    order: "12512B",
-    percentage: 55,
-    date: new Date("2015-07-20T08:30:00Z"),
-    customer: "Violet Phillips",
-    paymentStatus: true,
-    orderStatus: "ready",
-    amount: 124.97,
-  },
-  {
-    order: "35622A",
-    percentage: 55,
-    date: new Date("2015-07-20T08:30:00Z"),
-    customer: "Takudzwa Allen Mushai",
-    paymentStatus: false,
-    orderStatus: "shipped",
-    amount: 97,
-  },
-  {
-    order: "76543E",
-    percentage: 55,
-    date: new Date("2012-03-18T12:00:00Z"),
-    customer: "Francisco Henry",
-    paymentStatus: true,
-    orderStatus: "ready",
-    amount: 1024.97,
-  },
-  {
-    order: "47238B",
-    percentage: 55,
-    date: new Date("2007-09-28T09:20:00Z"),
-    customer: "Nettie Palmer",
-    paymentStatus: true,
-    orderStatus: "received",
-    amount: 17.43,
-  },
-  {
-    order: "12437B",
-    percentage: 55,
-    date: new Date("2018-04-10T17:00:00Z"),
-    customer: "Nettie Tyler",
-    paymentStatus: false,
-    orderStatus: "ready",
-    amount: 9.9,
-  },
-];
+type OrdersTableProps = {
+  orders: RecentTypes[];
+};
 
-const OrdersTable: React.FC = () => {
+const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
   const globalTheme = useTheme();
   const tableTheme = useMemo(
     () =>
@@ -101,7 +52,7 @@ const OrdersTable: React.FC = () => {
     []
   );
 
-  function formatDate(date: Date): string {
+  function formatDate(unformattedDate: Date): string {
     const months: string[] = [
       "January",
       "February",
@@ -116,6 +67,8 @@ const OrdersTable: React.FC = () => {
       "November",
       "December",
     ];
+
+    const date = new Date(unformattedDate);
 
     const month: string = months[date.getMonth()];
     const day: number = date.getDate();
@@ -143,10 +96,10 @@ const OrdersTable: React.FC = () => {
   const columns = useMemo<MRT_ColumnDef<RecentTypes>[]>(
     () => [
       {
-        accessorKey: "order",
+        accessorKey: "orderNumber",
         header: "Order",
         size: 200,
-        Cell: ({ cell }) => `#${cell.row.original.order}`,
+        Cell: ({ cell }) => `#${cell.row.original.orderNumber}`,
       },
       {
         accessorKey: "date",
@@ -167,10 +120,12 @@ const OrdersTable: React.FC = () => {
         Cell: ({ cell }) => (
           <div
             className={
-              cell.row.original.paymentStatus ? Style.paid : Style.pending
+              cell.row.original.paymentStatus === "paid"
+                ? Style.paid
+                : Style.pending
             }
           >
-            {cell.row.original.paymentStatus ? "Paid" : "Pending"}{" "}
+            {cell.row.original.paymentStatus === "paid" ? "Paid" : "Pending"}
           </div>
         ),
       },
@@ -207,7 +162,7 @@ const OrdersTable: React.FC = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data,
+    data: orders,
     muiSearchTextFieldProps: {
       placeholder: "Search...",
       //   sx: { minWidth: "300px", color: "red !important" },
