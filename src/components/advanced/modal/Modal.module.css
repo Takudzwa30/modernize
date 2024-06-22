@@ -1,0 +1,44 @@
+.modalBackdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999545345345345439;
+  overflow: auto;
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: white;
+  margin: auto;
+  padding: 30px;
+  position: relative;
+  border-radius: 4px;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.closeIcon svg {
+  color: #7e84a3;
+  transition: all ease 0.3s;
+}
+
+.closeIcon svg:hover {
+  color: #1e5eff;
+}
+
+.modalButton {
+  background-color: #ef4444;
+  color: white;
+  padding: 0.5rem;
+}
