@@ -149,8 +149,8 @@ const AddOrder: React.FC = () => {
               <label htmlFor="paymentStatus">Payment Status*</label>
               <Field as="select" id="paymentStatus" name="paymentStatus">
                 <option value="">Select Payment Status</option>
-                <option value="true">Paid</option>
-                <option value="false">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="pending">Pending</option>
                 {/* <option value="overdue">Overdue</option> */}
               </Field>
               {errors.paymentStatus && touched.paymentStatus ? (
