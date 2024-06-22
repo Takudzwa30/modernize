@@ -1,0 +1,36 @@
+.successModal {
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-block: 15px 4px;
+}
+
+.subTitle {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.continue {
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: 0.3s ease all;
+  cursor: pointer;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.continue {
+  color: #fff;
+  background: #1e5eff;
+  border: 1px solid transparent;
+}
+
+.continue:hover {
+  border: 1px solid #1e5eff;
+  background: #fff;
+  color: #1e5eff;
+}
