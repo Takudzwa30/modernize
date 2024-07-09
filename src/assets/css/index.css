@@ -191,6 +191,10 @@ a {
   background-color: #1e1e1e;
 }
 
+.MuiPaper-root {
+  box-shadow: none !important;
+}
+
 .MuiPaper-root .MuiPaper-elevation {
   background-color: transparent;
   color: #000;

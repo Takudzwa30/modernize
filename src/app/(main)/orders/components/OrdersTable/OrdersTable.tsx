@@ -7,6 +7,7 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
+  MRT_GlobalFilterTextField,
 } from "material-react-table";
 
 // Components
@@ -17,7 +18,7 @@ import { AddOrder } from "@/components/modals";
 import Style from "./OrdersTable.module.css";
 
 // Types
- type RecentTypes = {
+type RecentTypes = {
   orderNumber: string;
   date: Date;
   customer: string;
@@ -200,6 +201,41 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
     initialState: { showColumnFilters: true, showGlobalFilter: true },
     paginationDisplayMode: "pages",
     positionToolbarAlertBanner: "bottom",
+    renderTopToolbar: ({ table }) => {
+      const handleDeactivate = () => {
+        table.getSelectedRowModel().flatRows.map((row) => {
+          alert("deactivating " + row.getValue("name"));
+        });
+      };
+
+      const handleActivate = () => {
+        // console.log(table.getSelectedRowModel());
+
+        table.getSelectedRowModel().flatRows.map((row) => {
+          console.log(row.original);
+
+          alert("activating " + row.getValue("name"));
+        });
+      };
+
+      return (
+        <div>
+          <MRT_GlobalFilterTextField table={table} />
+          <button
+            disabled={!table.getIsSomeRowsSelected()}
+            onClick={handleDeactivate}
+          >
+            Deactivate
+          </button>
+          <button
+            disabled={!table.getIsSomeRowsSelected()}
+            onClick={handleActivate}
+          >
+            Activate
+          </button>
+        </div>
+      );
+    },
   });
 
   return (
