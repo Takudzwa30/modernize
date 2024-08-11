@@ -1,0 +1,28 @@
+.crumb {
+  cursor: pointer;
+}
+
+.crumb span,
+.crumb svg path {
+  transition: all ease 0.3s;
+}
+
+.crumb span {
+  color: #5a607f;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin-left: 5px;
+}
+
+.crumb svg path {
+  fill: #5a607f;
+}
+
+.crumb:hover svg path {
+  fill: #1e5eff;
+}
+
+.crumb:hover span {
+  color: #1e5eff;
+}
