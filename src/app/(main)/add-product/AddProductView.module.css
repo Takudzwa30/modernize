@@ -3,12 +3,43 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  margin-bottom: 25px;
 }
 
 .btns {
   gap: 15px;
   display: flex;
   align-items: center;
+}
+
+.categories {
+  margin-block: 20px;
+  height: 125px;
+  overflow-y: auto;
+}
+
+.categoryItem input {
+  margin-right: 5px;
+}
+
+.categoryItem label {
+  color: #131523;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: capitalize;
+}
+
+.createNew {
+  color: #1e5eff;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.createNew:hover {
+  color: #5a607f;
 }
 
 @media screen and (max-width: 576px) {

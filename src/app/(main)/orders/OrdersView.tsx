@@ -8,9 +8,6 @@ import OrdersTable from "./components/OrdersTable/OrdersTable";
 import { AddOrder } from "@/components/modals";
 import Button from "@/components/ui/button/Button";
 
-// Hooks
-import { useStoreData } from "@/hooks/useStoreData";
-
 // Contexts
 import { useModal } from "@/contexts/ModalContext";
 
@@ -35,8 +32,6 @@ const BACKEND_URL = "https://modernize-eb7ad-default-rtdb.firebaseio.com";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const OrdersView: React.FC = () => {
-  const { getData } = useStoreData();
-
   const { data, error } = useSWR<Order[]>(
     BACKEND_URL + "/orders.json",
     fetcher
