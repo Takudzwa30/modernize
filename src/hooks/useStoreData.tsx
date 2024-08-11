@@ -1,12 +1,11 @@
+// hooks/useStoreData.ts
 import useSWR, { mutate } from 'swr';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
-export function useData() {
-  // Fetch data with SWR
+export function useStoreData() {
   const { data, error } = useSWR('/data', fetcher);
 
-  // Function to store data
   const storeData = async (data: object, table: string) => {
     try {
       await fetch(
@@ -26,7 +25,6 @@ export function useData() {
     }
   };
 
-  // Function to get data
   const getData = async (table: string) => {
     try {
       const response = await fetch(

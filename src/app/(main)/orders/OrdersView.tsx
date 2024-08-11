@@ -1,11 +1,15 @@
 "use client";
 
 // Libraries
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 // Components
 import OrdersTable from "./components/OrdersTable/OrdersTable";
 import { AddOrder } from "@/components/modals";
+import Button from "@/components/ui/button/Button";
+
+// Hooks
+import { useStoreData } from "@/hooks/useStoreData";
 
 // Contexts
 import { useModal } from "@/contexts/ModalContext";
@@ -31,6 +35,8 @@ const BACKEND_URL = "https://modernize-eb7ad-default-rtdb.firebaseio.com";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const OrdersView: React.FC = () => {
+  const { getData } = useStoreData();
+
   const { data, error } = useSWR<Order[]>(
     BACKEND_URL + "/orders.json",
     fetcher
@@ -51,18 +57,12 @@ const OrdersView: React.FC = () => {
       <div className={Style.header}>
         <h4>Orders</h4>
         <div className={Style.btns}>
-          {/* <div
-            onClick={() => {
-              storeExpense();
-            }}
-            className={Style.export}
-          >
-            Export
-          </div> */}
-          <div onClick={handleOpenModal} className={Style.add}>
-            <IoMdAdd size={20} />
-            Add Order
-          </div>
+          {/* <Button variant text="Export" onClick={() => storeExpense()} /> */}
+          <Button
+            text="Add Order"
+            icon={<IoMdAdd size={20} />}
+            onClick={handleOpenModal}
+          />
         </div>
       </div>
       <section className={Style.table}>
