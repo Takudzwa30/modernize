@@ -209,8 +209,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
       };
 
       const handleActivate = () => {
-        // console.log(table.getSelectedRowModel());
-
         table.getSelectedRowModel().flatRows.map((row) => {
           console.log(row.original);
 
