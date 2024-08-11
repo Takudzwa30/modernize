@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 // Fonts
 import { Inter } from "next/font/google";
 
+// Analytics
+import { Analytics } from "@vercel/analytics/react";
+
 // Contexts
 import { UserProvider } from "@/contexts/UserContext";
 import { ModalProvider } from "@/contexts/ModalContext";
@@ -57,6 +60,7 @@ export default function RootLayout({
           <ModalProvider>
             {children}
             <Modal />
+            <Analytics />
           </ModalProvider>
         </UserProvider>
       </body>
