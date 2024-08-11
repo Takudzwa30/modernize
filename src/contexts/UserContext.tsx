@@ -27,6 +27,7 @@ type User = FirebaseUser | null;
 
 interface AuthContextType {
   user: User;
+  loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOutUser: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -34,7 +35,6 @@ interface AuthContextType {
   resetPassword: (email: string) => Promise<void>;
   verifyEmail: () => Promise<void>;
 }
-
 
 const UserContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -52,6 +52,7 @@ interface UserProviderProps {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const auth = getAuth(app);
@@ -66,6 +67,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
           // Check if user is already signed in
           const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
+            setLoading(false); // Set loading to false once auth state is determined
           });
 
           return unsubscribe;
@@ -73,7 +75,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         .catch((error) => {
           // An error occurred while enabling persistence
           console.error("Error enabling local persistence:", error);
+          setLoading(false);
         });
+
+      // Cleanup subscription on unmount
+      return () => {
+        const unsubscribe = auth.onAuthStateChanged(() => {});
+        unsubscribe();
+      };
     }
   }, []);
 
@@ -151,6 +160,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
+        loading,
         signIn,
         signInWithGoogle,
         signUp,

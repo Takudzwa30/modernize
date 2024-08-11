@@ -18,14 +18,15 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
-  const { user } = useUser(); // Assuming useUser hook provides the user authentication status
+  const { user, loading } = useUser();
 
   useEffect(() => {
-    // Redirect to login page if user is not logged in
-    if (!user) {
+    // Redirect to login page if user is not logged in and not in loading state
+    if (!loading && !user) {
       router.push("/auth/login");
     }
-  }, [user, router]);
+  }, [user, loading, router]);
+
 
   // Render the layout and children only if the user is logged in
   return user ? (
