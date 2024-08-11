@@ -5,4 +5,4 @@ export function storeData(data: object, table: string) {
     `https://modernize-eb7ad-default-rtdb.firebaseio.com/${table}.json`,
     data
   );
-}
+};
