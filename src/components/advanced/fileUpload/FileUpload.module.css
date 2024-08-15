@@ -1,0 +1,124 @@
+.fileUploadContainer {
+  position: relative;
+  margin: 70px 0 15px;
+  border: 2px dotted lightgray;
+  padding: 35px 20px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.formField {
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  border: none;
+  text-transform: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
+.formField:focus {
+  outline: none;
+}
+
+.inputLabel {
+  top: -46px;
+  font-size: 13px;
+  color: black;
+  left: 0;
+  position: absolute;
+
+  color: #131523;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.dragDropText {
+  margin-top: 15px;
+  color: #5a607f;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.filePreviewContainer {
+  margin-bottom: 25px;
+}
+
+.filePreviewContainer span {
+  font-size: 14px;
+}
+
+.previewList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.fileMetaData {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  background-color: rgba(5, 5, 5, 0.55);
+}
+
+.fileMetaData aside {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fileMetaData svg {
+  color: red;
+  cursor: pointer;
+}
+
+.removeFileIcon {
+  cursor: pointer;
+}
+
+.removeFileIcon:hover {
+  transform: scale(1.3);
+}
+
+.previewContainer {
+  padding: 0.25rem;
+  height: 120px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.previewContainer:hover {
+  opacity: 0.55;
+}
+
+.previewContainer:hover .fileMetaData {
+  display: flex;
+  position: absolute;
+}
+
+.previewContainer div:first-of-type {
+  height: 100%;
+  position: relative;
+}
+
+.imagePreview {
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+}
