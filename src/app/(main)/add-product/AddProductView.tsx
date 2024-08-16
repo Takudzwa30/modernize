@@ -52,6 +52,16 @@ export default function AddProductView() {
     }));
   };
 
+  const handleResetForm = (resetForm: () => void) => {
+    resetForm();
+
+    setNewUserInfo({
+      profileImages: [],
+    });
+
+    setSelectedCategories({});
+  };
+
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error } = useSWR(
     process.env.NEXT_PUBLIC_DATABASE_URL + "/categories.json",
@@ -81,10 +91,6 @@ export default function AddProductView() {
       <BreadCrumb buttonTitle="Back" />
       <div className={Style.header}>
         <h4>Add Product</h4>
-        <div className={Style.btns}>
-          <Button text="Cancel" variant />
-          <Button text="Save" />
-        </div>
       </div>
       <Formik
         initialValues={{
@@ -138,7 +144,7 @@ export default function AddProductView() {
           }
         }}
       >
-        {({ errors, touched, values }) => (
+        {({ errors, touched, values, resetForm }) => (
           <Card>
             <Form className={Style.form}>
               <h6>Information</h6>
@@ -289,7 +295,12 @@ export default function AddProductView() {
                     !values.productInventory
                   }
                   type="submit"
-                  text="Create Product"
+                  text="Save"
+                />
+                <Button
+                  onClick={() => handleResetForm(resetForm)}
+                  variant
+                  text="Cancel"
                 />
               </div>
             </Form>
