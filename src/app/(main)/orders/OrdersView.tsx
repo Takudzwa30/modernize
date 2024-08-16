@@ -1,7 +1,7 @@
 "use client";
 
-// Libraries
-import useSWR from "swr";
+// Utils
+import { useTableData } from "@/utils/useTableData";
 
 // Components
 import OrdersTable from "./components/OrdersTable/OrdersTable";
@@ -27,25 +27,10 @@ interface Order {
   amount: number;
 }
 
-const BACKEND_URL = "https://modernize-eb7ad-default-rtdb.firebaseio.com";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 const OrdersView: React.FC = () => {
-  const { data, error } = useSWR<Order[]>(
-    BACKEND_URL + "/orders.json",
-    fetcher
-  );
   const { openModal } = useModal();
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
-
-  const orders = Object.values(data);
-
-  const handleOpenModal = () => {
-    openModal(<AddOrder />);
-  };
+  const { data: orders, error } = useTableData<Order>("orders");
 
   return (
     <>
@@ -56,7 +41,7 @@ const OrdersView: React.FC = () => {
           <Button
             text="Add Order"
             icon={<IoMdAdd size={20} />}
-            onClick={handleOpenModal}
+            onClick={() => openModal(<AddOrder />)}
           />
         </div>
       </div>

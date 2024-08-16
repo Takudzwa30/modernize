@@ -3,15 +3,15 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useStoreData } from "@/hooks/useStoreData"; // Import your custom hook
 
-// Modals
+// Components
 import SuccessModal from "../successModal/SuccessModal";
+import Button from "@/components/ui/button/Button";
 
 // Contexts
 import { useModal } from "@/contexts/ModalContext";
 
 // Styles
 import Style from "./AddCategory.module.css";
-import Button from "@/components/ui/button/Button";
 
 // Types
 interface Values {
@@ -20,7 +20,7 @@ interface Values {
 
 const AddCategory: React.FC = () => {
   const { openModal, closeModal } = useModal();
-  const { storeData } = useStoreData(); // Destructure storeData from the hook
+  const { storeData } = useStoreData();
 
   // Validation Schema
   const validationSchema = Yup.object().shape({

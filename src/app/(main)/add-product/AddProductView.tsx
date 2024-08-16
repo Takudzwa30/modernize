@@ -25,7 +25,11 @@ import { useStoreData } from "@/hooks/useStoreData";
 
 // Types
 interface Values {
-  categoryName: string;
+  productName: string;
+  productDescription: string;
+  productPrice: number;
+  productInventory: number;
+  productColor: string;
 }
 
 export default function AddProductView() {
@@ -35,16 +39,12 @@ export default function AddProductView() {
   const [newUserInfo, setNewUserInfo] = useState({
     profileImages: [],
   });
-  // State to keep track of selected categories
+
   const [selectedCategories, setSelectedCategories] = useState<{
     [key: string]: boolean;
   }>({});
 
   // Functions
-  const handleOpenModal = () => {
-    openModal(<AddCategory />);
-  };
-
   const handleCheckboxChange = (category: string) => {
     setSelectedCategories((prev) => ({
       ...prev,
@@ -60,48 +60,21 @@ export default function AddProductView() {
 
   // Validation Schema
   const validationSchema = Yup.object().shape({
-    categoryName: Yup.string().required("Category Name is required"),
+    productName: Yup.string().required("Product name is required"),
+    productDescription: Yup.string().required(
+      "Product description is required"
+    ),
+    productPrice: Yup.number()
+      .required("Product price is required")
+      .min(0, "Price cannot be negative"),
+    productInventory: Yup.number()
+      .required("Product inventory is required")
+      .min(0, "Inventory cannot be negative"),
+    productColor: Yup.string().required("Product color is required"),
   });
 
   const updateUploadedFiles = (files: any) =>
     setNewUserInfo({ ...newUserInfo, profileImages: files });
-
-  const handleSubmit = async () => {
-    // event.preventDefault();
-
-    const storage = getStorage();
-
-    // Step 1: Create references and upload files
-    const imageUrls = await Promise.all(
-      newUserInfo.profileImages.map(async (file: File) => {
-        // Create a reference to 'fileName.jpg'
-        const fileRef = ref(storage, file.name);
-
-        // Create a reference to 'images/fileName.jpg'
-        const fileImagesRef = ref(storage, `products/${file.name}`);
-
-        // Example: Comparing references
-        console.log(fileRef.name === fileImagesRef.name); // true
-        console.log(fileRef.fullPath === fileImagesRef.fullPath); // false
-
-        // Upload the file to 'images/fileName.jpg'
-        await uploadBytes(fileImagesRef, file);
-
-        // Get the download URL for the uploaded file
-        return await getDownloadURL(fileImagesRef);
-      })
-    );
-
-    // Step 2: Store the image URLs in your Firebase Realtime Database
-    const newProduct = {
-      images: imageUrls,
-      // Add any other form data like categories here
-    };
-
-    // Logic to save newProduct in Firebase Realtime Database...
-
-    // Reset form or handle success
-  };
 
   return (
     <>
@@ -115,7 +88,11 @@ export default function AddProductView() {
       </div>
       <Formik
         initialValues={{
-          categoryName: "",
+          productName: "",
+          productDescription: "",
+          productPrice: 0,
+          productInventory: 0,
+          productColor: "",
         }}
         validationSchema={validationSchema}
         onSubmit={async (
@@ -123,46 +100,90 @@ export default function AddProductView() {
           { setSubmitting }: FormikHelpers<Values>
         ) => {
           try {
-            await storeData(values, "products");
+            // Step 1: Upload images and get URLs
+            const storage = getStorage();
+            const imageUrls = await Promise.all(
+              newUserInfo.profileImages.map(async (file: File) => {
+                const fileRef = ref(storage, `products/${file.name}`);
+                await uploadBytes(fileRef, file);
+                return await getDownloadURL(fileRef);
+              })
+            );
+
+            // Step 2: Prepare product data
+            const newProduct = {
+              ...values,
+              selectedCategories: Object.keys(selectedCategories).filter(
+                (key) => selectedCategories[key]
+              ),
+              images: imageUrls,
+            };
+
+            // Step 3: Store the product data in Firebase Realtime Database
+            await storeData(newProduct, "products");
 
             openModal(
               <SuccessModal
-                title="Category Added"
-                subTitle="New category added successfully"
+                title="Product Added"
+                subTitle="New product added successfully"
               />
             );
 
             // Optionally, revalidate SWR cache or handle any other logic
           } catch (error) {
-            alert("Failed to add category");
-            console.error("Category creation error:", error);
+            alert("Failed to add product");
+            console.error("Product creation error:", error);
           } finally {
             setSubmitting(false);
           }
         }}
       >
         {({ errors, touched, values }) => (
-          <Form className={Style.form}>
-            <Card>
+          <Card>
+            <Form className={Style.form}>
+              <h6>Information</h6>
               <div
                 className={
-                  errors.categoryName && touched.categoryName
+                  errors.productName && touched.productName
                     ? Style.errorFieldWrapper
                     : Style.fieldWrapper
                 }
               >
-                <label htmlFor="categoryName">Category Name*</label>
+                <label htmlFor="productName">Product Name*</label>
                 <Field
                   autoComplete="on"
-                  id="categoryName"
-                  name="categoryName"
-                  placeholder="Enter Category Name"
+                  id="productName"
+                  name="productName"
+                  placeholder="Enter product name"
                   type="text"
                 />
-                {errors.categoryName && touched.categoryName ? (
-                  <div className={Style.error}>{errors.categoryName}</div>
+                {errors.productName && touched.productName ? (
+                  <div className={Style.error}>{errors.productName}</div>
                 ) : null}
               </div>
+              <div
+                className={
+                  errors.productDescription && touched.productDescription
+                    ? Style.errorFieldWrapper
+                    : Style.fieldWrapper
+                }
+              >
+                <label htmlFor="productDescription">Product Description*</label>
+                <Field
+                  as="textarea"
+                  autoComplete="on"
+                  id="productDescription"
+                  name="productDescription"
+                  placeholder="Enter product description"
+                  rows={6}
+                />
+                {errors.productDescription && touched.productDescription ? (
+                  <div className={Style.error}>{errors.productDescription}</div>
+                ) : null}
+              </div>
+
+              <div className={Style.spacer} />
+
               <h6>Categories</h6>
               <div className={Style.categories}>
                 {data &&
@@ -182,27 +203,97 @@ export default function AddProductView() {
                     );
                   })}
               </div>
-              {/* <div className={Style.createNew} onClick={handleOpenModal}>
-          Create New
-        </div> */}
+
+              <div className={Style.spacer} />
 
               <FileUpload
                 accept=".jpg,.png,.jpeg"
                 label="Image"
-                // multiple
                 updateFilesCb={updateUploadedFiles}
               />
-              <Button type="submit" text="Save" />
+
+              <div className={Style.spacer} />
+              <h6>Color</h6>
+              <div
+                className={
+                  errors.productColor && touched.productColor
+                    ? Style.errorFieldWrapper
+                    : Style.fieldWrapper
+                }
+              >
+                <label htmlFor="productColor">Product Color*</label>
+                <Field
+                  autoComplete="on"
+                  id="productColor"
+                  name="productColor"
+                  placeholder="Enter product color"
+                  type="text"
+                />
+                {errors.productColor && touched.productColor ? (
+                  <div className={Style.error}>{errors.productColor}</div>
+                ) : null}
+              </div>
+
+              <div className={Style.spacer} />
+
+              <h6>Price</h6>
+              <div
+                className={
+                  errors.productPrice && touched.productPrice
+                    ? Style.errorFieldWrapper
+                    : Style.fieldWrapper
+                }
+              >
+                <label htmlFor="productPrice">Product Price*</label>
+                <Field
+                  autoComplete="on"
+                  id="productPrice"
+                  name="productPrice"
+                  placeholder="Enter product price"
+                  type="number"
+                />
+                {errors.productPrice && touched.productPrice ? (
+                  <div className={Style.error}>{errors.productPrice}</div>
+                ) : null}
+              </div>
+
+              <div className={Style.spacer} />
+
+              <h6>Stock</h6>
+              <div
+                className={
+                  errors.productInventory && touched.productInventory
+                    ? Style.errorFieldWrapper
+                    : Style.fieldWrapper
+                }
+              >
+                <label htmlFor="productInventory">Product Inventory*</label>
+                <Field
+                  autoComplete="on"
+                  id="productInventory"
+                  name="productInventory"
+                  placeholder="Enter product inventory"
+                  type="number"
+                />
+                {errors.productInventory && touched.productInventory ? (
+                  <div className={Style.error}>{errors.productInventory}</div>
+                ) : null}
+              </div>
 
               <div className={Style.btns}>
                 <Button
-                  disabled={values.categoryName === ""}
+                  disabled={
+                    !values.productName ||
+                    !values.productDescription ||
+                    !values.productPrice ||
+                    !values.productInventory
+                  }
                   type="submit"
-                  text="Create Category"
+                  text="Create Product"
                 />
               </div>
-            </Card>
-          </Form>
+            </Form>
+          </Card>
         )}
       </Formik>
     </>

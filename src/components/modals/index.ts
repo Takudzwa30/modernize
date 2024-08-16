@@ -1,3 +1,3 @@
-import AddOrder from "./addOrder/AddOrder";
+import AddOrder from "./orderModal/OrderModal";
 
 export { AddOrder };
