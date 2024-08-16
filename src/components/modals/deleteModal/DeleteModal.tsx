@@ -1,3 +1,6 @@
+// Libraries
+import { mutate } from "swr";
+
 // Utils
 import { deleteFromTable } from "@/utils/useTableData";
 
@@ -24,6 +27,7 @@ const DeleteModal: React.FC<ModalTypes> = ({ ids, tableName }) => {
 
         if (success) {
           openModal(<SuccessModal />);
+          mutate(`${process.env.NEXT_PUBLIC_DATABASE_URL}/${tableName}.json`);
         } else {
           console.error(`Failed to delete order with ID: ${id}`, error);
         }

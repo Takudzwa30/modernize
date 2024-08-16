@@ -216,7 +216,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
 
       const handleActivate = () => {
         openModal(<OrderModal updateId={ids[0]} />);
-        // alert("activating " + ids[0]);
       };
 
       return (
