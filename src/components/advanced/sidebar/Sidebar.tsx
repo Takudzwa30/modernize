@@ -19,6 +19,7 @@ interface Route {
   title: string;
   subRoutes?: string[];
   icon: React.ReactElement;
+  isActive?: boolean;
 }
 
 interface Category {
@@ -108,15 +109,14 @@ interface NavMenuProps {
 const NavMenu: React.FC<NavMenuProps> = ({ route, setSidebarIsOpen }) => {
   const pathname = usePathname();
 
+  const isActive =
+    route.path === pathname || route.subRoutes?.includes(pathname);
+
   return (
     <>
       {route.path ? (
         <Link
-          className={
-            pathname === route.path
-              ? Style.linkWrapperActive
-              : Style.linkWrapper
-          }
+          className={isActive ? Style.linkWrapperActive : Style.linkWrapper}
           href={route.path}
           onClick={() => {
             setSidebarIsOpen(false);
@@ -127,11 +127,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ route, setSidebarIsOpen }) => {
         </Link>
       ) : (
         <div
-          className={
-            pathname === route.path
-              ? Style.linkWrapperActive
-              : Style.linkWrapper
-          }
+          className={isActive ? Style.linkWrapperActive : Style.linkWrapper}
           onClick={() => {
             setSidebarIsOpen(false);
           }}

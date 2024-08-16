@@ -1,14 +1,16 @@
 // Libraries
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import useSWR, { mutate } from "swr";
+import { mutate } from "swr";
 
 // Contexts
 import { useModal } from "@/contexts/ModalContext";
 
 // Styles
-import Style from "./AddOrder.module.css";
+import Style from "./OrderModal.module.css";
 import SuccessModal from "../successModal/SuccessModal";
+import { addToTable, fetchById, updateInTable } from "@/utils/useTableData";
+import { useEffect, useState } from "react";
 
 // Types
 interface Values {
@@ -20,10 +22,21 @@ interface Values {
   amount: number;
 }
 
-const AddOrder: React.FC = () => {
+interface ModalProps {
+  updateId?: string;
+}
+
+const OrderModal: React.FC<ModalProps> = ({ updateId }) => {
   const { openModal } = useModal();
 
-  const BACKEND_URL = "https://modernize-eb7ad-default-rtdb.firebaseio.com";
+  const [initialValues, setInitialValues] = useState<Values>({
+    orderNumber: "",
+    date: "",
+    customer: "",
+    paymentStatus: "",
+    orderStatus: "",
+    amount: 0,
+  });
 
   // Validation Schema
   const validationSchema = Yup.object().shape({
@@ -37,44 +50,74 @@ const AddOrder: React.FC = () => {
       .positive("Amount must be positive"),
   });
 
+  const fetchOrder = async () => {
+    if (updateId) {
+      try {
+        const { data, error } = await fetchById<Values>(updateId);
+        if (data) {
+          console.log(data);
+
+          setInitialValues(data);
+        } else if (error) {
+          console.error(error);
+        }
+      } catch (error) {
+        console.error("Failed to fetch order:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchOrder();
+  }, [updateId]);
+
   return (
     <div className={Style.addOrderWrapper}>
-      <h5>Add Order</h5>
+      <h5>{updateId ? "Update Order" : "Add Order"}</h5>
       <Formik
-        initialValues={{
-          orderNumber: "",
-          date: "",
-          customer: "",
-          paymentStatus: "",
-          orderStatus: "",
-          amount: 0,
-        }}
+        initialValues={initialValues}
         validationSchema={validationSchema}
+        enableReinitialize={true}
         onSubmit={async (
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
           try {
-            await fetch(BACKEND_URL + "/orders.json", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(values),
-            });
+            let result;
 
-            openModal(
-              <SuccessModal
-                title="Order Successful"
-                subTitle="Added new order successfully"
-              />
-            );
+            if (updateId) {
+              result = await updateInTable<Values>("orders", updateId, values);
+            } else {
+              result = await addToTable<Values>("orders", values);
+            }
 
-            // Revalidate SWR cache
-            mutate(BACKEND_URL + "/orders.json");
+            if (result.success) {
+              openModal(
+                <SuccessModal
+                  title="Order Successful"
+                  subTitle={
+                    updateId
+                      ? "Order updated successfully"
+                      : "Added new order successfully"
+                  }
+                />
+              );
+
+              // Revalidate SWR cache
+              mutate(`${process.env.NEXT_PUBLIC_DATABASE_URL}/orders.json`);
+            } else {
+              alert(
+                `Failed to ${updateId ? "update" : "add"} order: ${
+                  result.error
+                }`
+              );
+            }
           } catch (error) {
-            alert("Failed to add order");
-            console.error("Order creation error:", error);
+            alert(`Failed to ${updateId ? "update" : "add"} order`);
+            console.error(
+              `Order ${updateId ? "update" : "creation"} error:`,
+              error
+            );
           } finally {
             setSubmitting(false);
           }
@@ -208,7 +251,7 @@ const AddOrder: React.FC = () => {
               }
               type="submit"
             >
-              Add Order
+              {updateId ? "Update Order" : "Add Order"}
             </button>
           </Form>
         )}
@@ -217,4 +260,4 @@ const AddOrder: React.FC = () => {
   );
 };
 
-export default AddOrder;
+export default OrderModal;

@@ -1,0 +1,40 @@
+.delete_modal h4 {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.delete_modal p {
+  color: #131523;
+  font-weight: 400;
+  margin-block: 20px 30px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.deleteButton,
+.cancelButton {
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  transition: all ease 0.3s;
+  cursor: pointer;
+  border: 1px solid #f0142f;
+}
+
+.deleteButton,
+.cancelButton:hover {
+  background: #f0142f;
+  color: white;
+}
+
+.cancelButton,
+.deleteButton:hover {
+  color: #f0142f;
+  background: none;
+}

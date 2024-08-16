@@ -1,0 +1,44 @@
+/* components/ui/Button.module.css */
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: 0.3s ease all;
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.export {
+  border: 1px solid #d7dbec;
+  background: #fff;
+  color: #1e5eff;
+}
+
+.export:hover {
+  color: #fff;
+  background: #1e5eff;
+}
+
+.add {
+  color: #fff;
+  background: #1e5eff;
+  border: 1px solid transparent;
+}
+
+.add:hover {
+  border: 1px solid #d7dbec;
+  background: #fff;
+  color: #1e5eff;
+}

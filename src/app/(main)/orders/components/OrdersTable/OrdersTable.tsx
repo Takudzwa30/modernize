@@ -12,10 +12,14 @@ import {
 
 // Components
 import Card from "@/components/ui/card/Card";
-import { AddOrder } from "@/components/modals";
 
 // Styles
 import Style from "./OrdersTable.module.css";
+import { useModal } from "@/contexts/ModalContext";
+import DeleteModal from "@/components/modals/deleteModal/DeleteModal";
+import DeleteButton from "@/assets/svgComponents/DeleteButton";
+import EditButton from "@/assets/svgComponents/EditButton";
+import OrderModal from "@/components/modals/orderModal/OrderModal";
 
 // Types
 type RecentTypes = {
@@ -25,6 +29,7 @@ type RecentTypes = {
   paymentStatus: string;
   orderStatus: string;
   amount: number;
+  id: string;
 };
 
 type OrdersTableProps = {
@@ -33,6 +38,7 @@ type OrdersTableProps = {
 
 const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
   const globalTheme = useTheme();
+  const { openModal } = useModal();
   const tableTheme = useMemo(
     () =>
       createTheme({
@@ -163,10 +169,9 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
 
   const table = useMaterialReactTable({
     columns,
-    data: orders,
+    data: orders.reverse(),
     muiSearchTextFieldProps: {
       placeholder: "Search...",
-      //   sx: { minWidth: "300px", color: "red !important" },
       variant: "outlined",
     },
     muiTableHeadCellProps: {
@@ -202,35 +207,38 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
     paginationDisplayMode: "pages",
     positionToolbarAlertBanner: "bottom",
     renderTopToolbar: ({ table }) => {
-      const handleDeactivate = () => {
-        table.getSelectedRowModel().flatRows.map((row) => {
-          alert("deactivating " + row.getValue("name"));
-        });
+      const selectedRows = table.getSelectedRowModel().flatRows;
+      const ids = selectedRows.map((row) => row.original.id);
+
+      const handleDeactivate = async () => {
+        openModal(<DeleteModal ids={ids} tableName="orders" />);
       };
 
       const handleActivate = () => {
-        table.getSelectedRowModel().flatRows.map((row) => {
-          console.log(row.original);
-
-          alert("activating " + row.getValue("name"));
-        });
+        openModal(<OrderModal updateId={ids[0]} />);
+        // alert("activating " + ids[0]);
       };
 
       return (
-        <div>
-          <MRT_GlobalFilterTextField table={table} />
-          <button
-            disabled={!table.getIsSomeRowsSelected()}
-            onClick={handleDeactivate}
-          >
-            Deactivate
-          </button>
-          <button
-            disabled={!table.getIsSomeRowsSelected()}
-            onClick={handleActivate}
-          >
-            Activate
-          </button>
+        <div className={Style.tableFilters}>
+          <MRT_GlobalFilterTextField
+            table={table}
+            sx={{ input: { color: "black" } }}
+          />
+          <div className={Style.actions}>
+            <button
+              disabled={!table.getIsSomeRowsSelected()}
+              onClick={handleDeactivate}
+            >
+              <DeleteButton />
+            </button>
+            <button
+              disabled={!table.getIsSomeRowsSelected() || ids.length > 1}
+              onClick={handleActivate}
+            >
+              <EditButton />
+            </button>
+          </div>
         </div>
       );
     },

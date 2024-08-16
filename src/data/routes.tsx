@@ -26,7 +26,7 @@ export const sidebarCategories = [
       },
       {
         title: "Products",
-        subRoutes: [],
+        subRoutes: ["/add-product"],
         icon: <IoPricetagOutline />,
       },
       {
