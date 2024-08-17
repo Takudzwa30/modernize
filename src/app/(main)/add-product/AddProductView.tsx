@@ -79,7 +79,8 @@ export default function AddProductView() {
       .min(0, "Price cannot be negative"),
     productInventory: Yup.number()
       .required("Product inventory is required")
-      .min(0, "Inventory cannot be negative"),
+      .min(0, "Inventory cannot be negative")
+      .integer("Inventory must be a whole number"),
     productColor: Yup.string().required("Product color is required"),
   });
 
@@ -144,7 +145,7 @@ export default function AddProductView() {
           }
         }}
       >
-        {({ errors, touched, values, resetForm }) => (
+        {({ errors, touched, values, resetForm, isValid }) => (
           <Card>
             <Form className={Style.form}>
               <h6>Information</h6>
@@ -287,16 +288,7 @@ export default function AddProductView() {
               </div>
 
               <div className={Style.btns}>
-                <Button
-                  disabled={
-                    !values.productName ||
-                    !values.productDescription ||
-                    !values.productPrice ||
-                    !values.productInventory
-                  }
-                  type="submit"
-                  text="Save"
-                />
+                <Button disabled={!isValid} type="submit" text="Save" />
                 <Button
                   onClick={() => handleResetForm(resetForm)}
                   variant

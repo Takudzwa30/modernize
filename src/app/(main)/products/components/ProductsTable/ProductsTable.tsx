@@ -66,7 +66,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
       {
         accessorKey: "productDetails",
         header: "Product",
-        size: 240,
+        size: 300,
         Cell: ({ cell }) => {
           const { productName, selectedCategories, images } = cell.row.original;
           return (
@@ -98,7 +98,13 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
         accessorKey: "productInventory",
         header: "Inventory",
         size: 100,
-        Cell: ({ cell }) => cell.row.original.productInventory + " in stock",
+        Cell: ({ cell }) => {
+          return cell.row.original.productInventory > 0 ? (
+            <div>{cell.row.original.productInventory + " in stock"}</div>
+          ) : (
+            <div className={Style.outOfStock}>Out of Stock</div>
+          );
+        },
       },
       {
         accessorKey: "productPrice",
